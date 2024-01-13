@@ -65,7 +65,9 @@ body {
 .itemBox {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .removeBtn {

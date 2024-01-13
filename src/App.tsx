@@ -21,6 +21,12 @@ function App() {
 
   const totalPrice = orderItems.reduce((acc, orderItem) => acc + orderItem.price * orderItem.count, 0);
 
+  const removeOrderItems = (index) => {
+    const updateOrderItems = [... orderItems];
+    updateOrderItems.splice(index, 1);
+    setOrderItems(updateOrderItems)
+  }
+
   return (
     <div className="mainMenu">
       <div className="orderMenu">
@@ -30,7 +36,7 @@ function App() {
             <span className='itemSpan'>
               x{orderItem.count} {orderItem.name} - Price: {orderItem.price * orderItem.count} KGZ
             </span>
-            <button className='removeBtn'>X</button>
+            <button className='removeBtn' onClick={() => removeOrderItems(index)}>X</button>
           </div>
         ))}
         {orderItems.length === 0 && <p>Order is empty!</p>}

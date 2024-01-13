@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { PRODUCTS } from './constants';
+import OrderItem from './orderItem';
 
 function App() {
   const [orderItems, setOrderItems] = useState<Menu[]>([]);
@@ -22,7 +23,7 @@ function App() {
   const totalPrice = orderItems.reduce((acc, orderItem) => acc + orderItem.price * orderItem.count, 0);
 
   const removeOrderItems = (index) => {
-    const updateOrderItems = [... orderItems];
+    const updateOrderItems = [...orderItems];
     updateOrderItems.splice(index, 1);
     setOrderItems(updateOrderItems)
   }
@@ -32,12 +33,7 @@ function App() {
       <div className="orderMenu">
         <h2>Order Menu</h2>
         {orderItems.map((orderItem, index) => (
-          <div key={index} className='itemBox'>
-            <span className='itemSpan'>
-              x{orderItem.count} {orderItem.name} - Price: {orderItem.price * orderItem.count} KGZ
-            </span>
-            <button className='removeBtn' onClick={() => removeOrderItems(index)}>X</button>
-          </div>
+          <OrderItem key={index} orderItem={orderItem} onRemove={() => removeOrderItems(index)} />
         ))}
         {orderItems.length === 0 && <p>Order is empty!</p>}
         <div className='totalPrice'>
